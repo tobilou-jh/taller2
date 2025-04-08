@@ -14,11 +14,12 @@ int main (int argc, char *argv[]) {
     float altaAsignatura[3], bajaAsignatura[3];
     int aprobadosPorAsignatura[3] = {0, 0, 0};
     int reprobadosPorAsignatura[3] = {0, 0, 0};
-    int opc;
-    int opc2;
+    int opc=0;
+    int opc2=0;
     char estudiantes[5][30];
     char asig[3][30];
-    int i;
+    int i=0;
+    
 
 
     printf("Ingrese un opcion: \n");
@@ -32,22 +33,28 @@ int main (int argc, char *argv[]) {
 
     switch (opc){
         case 1:
-           
+            
             do
             {
                 printf("Ingrese el nombre del estudiante: \n");
                 fflush(stdin);
                 scanf("%s",&estudiantes[i][30]);
-                int opc3=1;
-                if(opc3=1){
-                    i+=1;
-                    printf("Si desea ingresar otro usuario presione 1\n");
-                    scanf("%d",&opc2);
+                
+                i++;
+                printf("Desea ingresar otro estudiante? (1: Si, 2: No): \n");
+                scanf("%d",&opc2);
+                if (opc2!=1 && opc2!=2){
+                    printf("Opcion invalida. Ingrese nuevamente: \n");
                 }
+                if (i>=5){
+                    printf("Limite de estudiantes alcanzado.\n");
+                    opc2=2;
+                }
+            
                     
                 
                 
-            } while (opc2!=1);
+            } while (opc2=1);
             
      
             break;
