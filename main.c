@@ -14,6 +14,61 @@ int main (int argc, char *argv[]) {
     float altaAsignatura[3], bajaAsignatura[3];
     int aprobadosPorAsignatura[3] = {0, 0, 0};
     int reprobadosPorAsignatura[3] = {0, 0, 0};
+    int opc;
+    int opc2;
+    char estudiantes[5][30];
+    char asig[3][30];
+    int i;
+
+
+    printf("Ingrese un opcion: \n");
+    printf("1. Ingresar estudiantes: \n");
+    printf("2. Ingrese la asignaturas: \n");
+    printf("3. Ingresar notas: \n");
+    printf("4.Mostrar promedios: \n");
+    printf("5.Mostrar notas: \n");
+    printf("6.Salir\n");
+    scanf("%d",&opc);
+
+    switch (opc){
+        case 1:
+           
+            do
+            {
+                printf("Ingrese el nombre del estudiante: \n");
+                fflush(stdin);
+                scanf("%s",&estudiantes[i][30]);
+                int opc3=1;
+                if(opc3=1){
+                    i+=1;
+                    printf("Si desea ingresar otro usuario presione 1\n");
+                    scanf("%d",&opc2);
+                }
+                    
+                
+                
+            } while (opc2!=1);
+            
+     
+            break;
+
+        case 2:
+            
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+
+        defualt:
+            break;
+
+
+    }
 
     printf("Ingrese las notas de los alumnos:\n");
     for (int i = 0; i < 5; i++) {
