@@ -21,61 +21,77 @@ int main (int argc, char *argv[]) {
     int i=0;
     
 
-
-    printf("Ingrese un opcion: \n");
-    printf("1. Ingresar estudiantes: \n");
-    printf("2. Ingrese la asignaturas: \n");
-    printf("3. Ingresar notas: \n");
-    printf("4.Mostrar promedios: \n");
-    printf("5.Mostrar notas: \n");
-    printf("6.Salir\n");
-    scanf("%d",&opc);
-
-    switch (opc){
-        case 1:
-            
-            do
-            {
-                printf("Ingrese el nombre del estudiante: \n");
-                fflush(stdin);
-                scanf("%s",&estudiantes[i][30]);
+    do{
+        printf("Ingrese un opcion: \n");
+        printf("1. Ingresar estudiantes: \n");
+        printf("2. Ingrese la asignaturas: \n");
+        printf("3. Ingresar notas: \n");
+        printf("4.Mostrar promedios: \n");
+        printf("5.Mostrar notas: \n");
+        printf("6.Salir\n");
+        scanf("%d",&opc);
+    
+        switch (opc){
+            case 1:
                 
-                i++;
-                printf("Desea ingresar otro estudiante? (1: Si, 2: No): \n");
-                scanf("%d",&opc2);
-                if (opc2!=1 && opc2!=2){
-                    printf("Opcion invalida. Ingrese nuevamente: \n");
-                }
-                if (i>=5){
-                    printf("Limite de estudiantes alcanzado.\n");
-                    opc2=2;
-                }
-            
+                do
+                {
+                    printf("Ingrese el nombre del estudiante: \n");
+                    fflush(stdin);
+                    scanf("%s",&estudiantes[i][30]);
+                    i++;
+                    printf("Desea ingresar otro estudiante? (1: Si, 2: No): \n");
+                    scanf("%d",&opc2);
+                    if (opc2!=1 && opc2!=2){
+                        printf("Opcion invalida. Ingrese nuevamente: \n");
+                    }
+                    if (i>=5){
+                        printf("Limite de estudiantes alcanzado.\n");
+                        opc2=2;
+                    }
+                
+                        
                     
+                    
+                } while (opc2==1);
                 
-                
-            } while (opc2=1);
-            
-     
-            break;
+        
+                break;
 
-        case 2:
-            
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
+            case 2:
+                opc2=1;
+                i=0;    
+                do{
+                    printf("Ingrese el nombre de la asignatura: \n");
+                    fflush(stdin);
+                    scanf("%s",&asig[i][30]);
+                    i++;
+                    printf("Desea ingresar otra asignatura? (1: Si, 2: No): \n");
+                    scanf("%d",&opc2);
+                    if (opc2!=1 && opc2!=2){
+                        printf("Opcion invalida. Ingrese nuevamente: \n");
+                    }
+                    if (i>=3){
+                        printf("Limite de asignaturas alcanzado.\n");
+                        opc2=2;
+                    }
+                }while(opc2==1);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
 
-        defualt:
-            break;
+            defualt:
+                break;
 
 
-    }
+        }
+    }while(opc!=6);
 
     printf("Ingrese las notas de los alumnos:\n");
     for (int i = 0; i < 5; i++) {
