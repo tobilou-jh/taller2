@@ -16,10 +16,14 @@ int main (int argc, char *argv[]) {
     int reprobadosPorAsignatura[3] = {0, 0, 0};
     int opc=0;
     int opc2=0;
+    int opc3=0;
+    int opc4=0;
+    int opc5=1;
     char estudiantes[5][30];
     char asig[3][30];
     int cont=0;
     int cont2=0;
+    int len=0;
     
 
     do{
@@ -39,7 +43,9 @@ int main (int argc, char *argv[]) {
                 {
                     printf("Ingrese el nombre del estudiante: \n");
                     fflush(stdin);
-                    scanf("%s",&estudiantes[cont][30]);
+                    fgets(estudiantes[cont], 30, stdin);
+                    len = strlen(estudiantes[cont]) - 1;
+                    estudiantes[cont][len]='\0';
                     cont++;
                     printf("Desea ingresar otro estudiante? (1: Si, 2: No): \n");
                     scanf("%d",&opc2);
@@ -61,7 +67,9 @@ int main (int argc, char *argv[]) {
                 do{
                     printf("Ingrese el nombre de la asignatura: \n");
                     fflush(stdin);
-                    scanf("%s",&asig[cont2][30]);
+                    fgets(asig[cont2], 30, stdin);
+                    len = strlen(asig[cont2]) - 1;
+                    asig[cont2][len]='\0';
                     cont2++;
                     printf("Desea ingresar otra asignatura? (1: Si, 2: No): \n");
                     scanf("%d",&opc2);
@@ -75,36 +83,56 @@ int main (int argc, char *argv[]) {
                 }while(opc2==1);
                 break;
             case 3:
-                printf("Ingrese las notas de los alumnos:\n");
-                for (int i = 1; i <= cont; i++) {
-                    
-                    printf("Estudiante:%s\n",estudiantes[i]);
-                    altaEstudiante[i] = 0;
-                    bajaEstudiante[i] = 10;
-                    for (int j = 1; j <= cont2; j++) {
-                        printf("Nota %s: ",asig[j]);
-                        fflush(stdin);
-                        scanf("%f", &notas[i][j]);
-                        if (notas[i][j] < 0 || notas[i][j] > 10) {
-                            printf("Nota invalida. Ingrese nuevamente: ");
-                            j--;
-                        } else {
-                            if (notas[i][j] > altaEstudiante[i]) {
-                                altaEstudiante[i] = notas[i][j];
-                            }
-                            if (notas[i][j] < bajaEstudiante[i]) {
-                                bajaEstudiante[i] = notas[i][j];
-                            }
-                            if (notas[i][j] >= 6) {
-                                aprobadosPorAsignatura[j]++;
-                            } else {
-                                reprobadosPorAsignatura[j]++;
-                            }
-                        }
-                    }
+                do{
+                    printf("Ingrese las notas de los alumnos:\n");
+                printf("#\t\tNombre\n");
+                for (int i = 0; i < cont; i++) {
+                    printf("%d\t\t%s\n", i+1 , estudiantes[i]);
                 }
+                printf("Ingrese el numero del estudiante: \n");
+                scanf("%d", &opc3);
+                printf("#\t\tAsignatura\n");
+                fflush(stdin);
+                for (int i = 0; i < cont2; i++) {
+                    printf("%d\t\t%s\n", i+1 , asig[i]);
+                }
+                printf("Ingrese el numero de la asignatura: \n");
+                scanf("%d", &opc4);
+                printf("Ingrese la nota a ingresar: \n");
+                fflush(stdin);
+                do{
+                    scanf("%f", &notas[opc3][opc4]);
+                    if (notas[opc3][opc4] < 0 || notas[opc3][opc4] > 10) {
+                        printf("Nota invalida. Ingrese nuevamente: ");
+                    }
+                    
+                }while(notas[opc3][opc4] < 0 || notas[opc3][opc4] > 10);
+                
+                printf("Desea ingresar otra nota? (1: Si, 2: No): \n");
+                scanf("%d",&opc5);
+                }while(opc5==1);
+                
                 break;
             case 4:
+                printf("Promedios de los alumnos:\n");
+                printf("#\t\tNombre\n");
+                for (int i = 0; i < cont; i++) {
+                    printf("%d\t\t%s\n", i+1 , estudiantes[i]);
+                }
+                for (int i = 1; i <= cont; i++) {
+                    for (int j = 1; j <= cont2; j++) {
+                        promedio[i] += notas[i][j];
+                        printf("%s %d: %.2f\n",estudiantes[i], i + 1, promedio[i]);
+                        if (notas[i][j] > altaAsignatura[j]) {
+                            altaAsignatura[j] = notas[i][j];
+                        }
+                        if (notas[i][j] < bajaAsignatura[j]) {
+                            bajaAsignatura[j] = notas[i][j];
+                        }
+                    }
+                    
+                }
+
                 break;
             case 5:
                 break;
@@ -146,15 +174,18 @@ int main (int argc, char *argv[]) {
     }
 
     printf("Promedios de los alumnos:\n");
-    for (int i = 0; i < 5; i++) {
-        promedio[i] = (notas[i][0] + notas[i][1] + notas[i][2]) / 3;
-        printf("Alumno %d: %.2f\n", i + 1, promedio[i]);
-        if (promedio[i] > cALTAes) {
-            cALTAes = promedio[i];
+    for (int i = 0; i < cont; i++) {
+        for (int j = 0; j < cont2; j++) {
+            promedio[i] += notas[i][j];
+            printf("%s %d: %.2f\n",estudiantes[i], i + 1, promedio[i]);
+            if (notas[i][j] > altaAsignatura[j]) {
+                altaAsignatura[j] = notas[i][j];
+            }
+            if (notas[i][j] < bajaAsignatura[j]) {
+                bajaAsignatura[j] = notas[i][j];
+            }
         }
-        if (promedio[i] < cBAJAes) {
-            cBAJAes = promedio[i];
-        }
+        
     }
 
     printf("Promedios de las asignaturas:\n");
