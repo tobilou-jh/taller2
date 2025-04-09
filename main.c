@@ -18,7 +18,8 @@ int main (int argc, char *argv[]) {
     int opc2=0;
     char estudiantes[5][30];
     char asig[3][30];
-    int i=0;
+    int cont=0;
+    int cont2=0;
     
 
     do{
@@ -38,21 +39,17 @@ int main (int argc, char *argv[]) {
                 {
                     printf("Ingrese el nombre del estudiante: \n");
                     fflush(stdin);
-                    scanf("%s",&estudiantes[i][30]);
-                    i++;
+                    scanf("%s",&estudiantes[cont][30]);
+                    cont++;
                     printf("Desea ingresar otro estudiante? (1: Si, 2: No): \n");
                     scanf("%d",&opc2);
                     if (opc2!=1 && opc2!=2){
                         printf("Opcion invalida. Ingrese nuevamente: \n");
                     }
-                    if (i>=5){
+                    if (cont>=5){
                         printf("Limite de estudiantes alcanzado.\n");
                         opc2=2;
                     }
-                
-                        
-                    
-                    
                 } while (opc2==1);
                 
         
@@ -60,24 +57,52 @@ int main (int argc, char *argv[]) {
 
             case 2:
                 opc2=1;
-                i=0;    
+                cont2=0;    
                 do{
                     printf("Ingrese el nombre de la asignatura: \n");
                     fflush(stdin);
-                    scanf("%s",&asig[i][30]);
-                    i++;
+                    scanf("%s",&asig[cont2][30]);
+                    cont2++;
                     printf("Desea ingresar otra asignatura? (1: Si, 2: No): \n");
                     scanf("%d",&opc2);
                     if (opc2!=1 && opc2!=2){
                         printf("Opcion invalida. Ingrese nuevamente: \n");
                     }
-                    if (i>=3){
+                    if (cont2>=3){
                         printf("Limite de asignaturas alcanzado.\n");
                         opc2=2;
                     }
                 }while(opc2==1);
                 break;
             case 3:
+                printf("Ingrese las notas de los alumnos:\n");
+                for (int i = 1; i <= cont; i++) {
+                    
+                    printf("Estudiante:%s\n",estudiantes[i]);
+                    altaEstudiante[i] = 0;
+                    bajaEstudiante[i] = 10;
+                    for (int j = 1; j <= cont2; j++) {
+                        printf("Nota %s: ",asig[j]);
+                        fflush(stdin);
+                        scanf("%f", &notas[i][j]);
+                        if (notas[i][j] < 0 || notas[i][j] > 10) {
+                            printf("Nota invalida. Ingrese nuevamente: ");
+                            j--;
+                        } else {
+                            if (notas[i][j] > altaEstudiante[i]) {
+                                altaEstudiante[i] = notas[i][j];
+                            }
+                            if (notas[i][j] < bajaEstudiante[i]) {
+                                bajaEstudiante[i] = notas[i][j];
+                            }
+                            if (notas[i][j] >= 6) {
+                                aprobadosPorAsignatura[j]++;
+                            } else {
+                                reprobadosPorAsignatura[j]++;
+                            }
+                        }
+                    }
+                }
                 break;
             case 4:
                 break;
